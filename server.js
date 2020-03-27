@@ -22,7 +22,7 @@ app.post('/', function(req, res) {
 
   const providedAPIKey = req.body.api_key;
   if (providedAPIKey != apiKey) {
-    res.status(404).end(JSON.stringify({ status: "error", "message": "invalid API key" }));
+    res.status(404).end(JSON.stringify({ status: "Error", "message": "Invalid API key." }));
     return;
   }
 
@@ -31,7 +31,7 @@ app.post('/', function(req, res) {
     rpio.write(relayPin, rpio.HIGH);
   }, 500);
 
-  res.status(200).end(JSON.stringify({ status: "ok", "message": "clicked!" }));
+  res.status(200).end(JSON.stringify({ status: "OK", "message": "Garage door button clicked!" }));
 });
 
 app.listen(port);
