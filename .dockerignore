@@ -1,2 +1,11 @@
-node_modules
+.git/
+node_modules/
+out/
+
+.env
+.env.example
+.gitignore
+Dockerfile
+Makefile
 npm-debug.log
+README.md
