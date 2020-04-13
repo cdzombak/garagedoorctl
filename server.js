@@ -17,6 +17,11 @@ const relayPin = process.env.GDCTL_RELAY_PIN || 11;
 
 rpio.open(relayPin, rpio.OUTPUT, rpio.HIGH);
 
+app.get('/ping', function(req, res) {
+  res.setHeader('Content-Type', 'application/json');
+  res.status(200).end(JSON.stringify({ status: "OK", "message": "API is online." }));
+});
+
 app.post('/', function(req, res) {
   res.setHeader('Content-Type', 'application/json');
 
