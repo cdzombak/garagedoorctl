@@ -25,7 +25,7 @@ app.use(function (err, req, res, next) {
   res.status(500).end(JSON.stringify({ status: 'Error', 'message': err }));
 });
 
-const apiKey = process.env.GDCTL_API_KEY || "foobar";
+const apiKey = process.env.GDCTL_API_KEY || 'foobar';
 const port = process.env.GDCTL_PORT || 80;
 const relayPin = process.env.GDCTL_RELAY_PIN || 11;
 
@@ -33,7 +33,7 @@ rpio.open(relayPin, rpio.OUTPUT, rpio.HIGH);
 
 app.get('/ping', function(req, res) {
   res.setHeader('Content-Type', 'application/json');
-  res.status(200).end(JSON.stringify({ status: "OK", "message": "API is online." }));
+  res.status(200).end(JSON.stringify({ status: 'OK', 'message': 'API is online.' }));
 });
 
 app.post('/', function(req, res) {
@@ -49,8 +49,7 @@ app.post('/', function(req, res) {
   setTimeout(function() {
     rpio.write(relayPin, rpio.HIGH);
   }, 500);
-
-  res.status(200).end(JSON.stringify({ status: "OK", "message": "Garage door button clicked!" }));
+  res.status(200).end(JSON.stringify({ status: 'OK', 'message': 'Garage door button clicked!' }));
 });
 
 app.listen(port);
