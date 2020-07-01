@@ -1,15 +1,27 @@
 "use strict";
 
 // Based on https://github.com/Howchoo/garage-pi/blob/master/server.js
-// but simpler.
+// ...but simpler.
 
 const bodyParser = require('body-parser');
 const express = require('express');
 const rpio = require('rpio');
 
 const app = express();
+
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
+
+// Logging & error handling:
+app.use(function(req, res, next) {
+  console.log(`${new Date().toISOString()} ${req.ip} ${req.method} ${req.path} (body JSON: ${JSON.stringify(req.body)})`);
+  next();
+});
+app.use(function (err, req, res, next) {
+  console.log(`${new Date().toISOString()}: Unhandled error:\n${err.stack}`);
+  res.setHeader('Content-Type', 'application/json');
+  res.status(500).end(JSON.stringify({ status: 'Error', 'message': err }));
+});
 
 const apiKey = process.env.GDCTL_API_KEY || "foobar";
 const port = process.env.GDCTL_PORT || 80;
@@ -40,4 +52,4 @@ app.post('/', function(req, res) {
 });
 
 app.listen(port);
-console.log('Running on http://localhost:' + port);
+console.log(`${new Date().toISOString()}: Listening on port ${port}`);
