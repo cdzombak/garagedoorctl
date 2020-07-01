@@ -41,7 +41,7 @@ app.post('/', function(req, res) {
 
   const providedAPIKey = req.body.api_key;
   if (providedAPIKey != apiKey) {
-    res.status(404).end(JSON.stringify({ status: "Error", "message": "Invalid API key." }));
+    res.status(403).end(JSON.stringify({ status: 'Error', 'message': 'Invalid API key.' }));
     return;
   }
 
